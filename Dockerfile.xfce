@@ -1,0 +1,13 @@
+From alexpacheco/centos7:desktop
+
+Label "maintainer"="alp514@lehigh.edu" \
+      "os"="CentOS 7" \
+      "compiler"="GCC 4.8.5" \
+      "app"="Desktop" \
+      "description"="XFCE Desktop  for LURC's OOD" 
+
+# Install XFCE desktop
+RUN yum -y groupinstall "Xfce" \
+ && rm -rf /var/cache/yum \
+ && yum clean all
+
