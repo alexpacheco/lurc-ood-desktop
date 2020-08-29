@@ -1,0 +1,36 @@
+BootStrap: localimage
+From: xfce.sif
+
+%apprun vncserver
+  exec vncserver "${@}"
+
+%apprun vncpasswd
+  exec vncpasswd "${@}"
+
+%apprun websockify
+  exec /opt/websockify/run "${@}"
+
+%apprun avogadro
+  exec avogadro 
+
+%apprun gabedit
+  exec gabedit 
+
+%apprun ovito
+  exec ovito 
+
+%environment
+  export PATH=/opt/TurboVNC/bin:/opt/ovito/bin:${PATH}
+
+%post 
+  cd /opt
+  wget https://download-ib01.fedoraproject.org/pub/epel/6/x86_64/Packages/g/gabedit-2.3.0-1.el6.x86_64.rpm
+  wget http://www.ovito.org/download/master/ovito-basic-3.2.0-x86_64.tar.xz
+  yum install -y gabedit-2.3.0-1.el6.x86_64.rpm avogadro2 avogadro2-libs avogadro2-libs-devel blender blender-rpm-macros
+  tar -xvJf ovito-basic-3.2.0-x86_64.tar.xz
+  mv ovito-basic-3.2.0-x86_64 ovito
+  rm -rf gabedit-2.3.0-1.el6.x86_64.rpm ovito-basic-3.2.0-x86_64.tar.xz
+  rm -rf /var/cache/yum 
+  yum clean all
+
+

@@ -1,0 +1,37 @@
+BootStrap: docker
+From: centos:7
+
+%apprun vncserver
+  exec vncserver "${@}"
+
+%apprun vncpasswd
+  exec vncpasswd "${@}"
+
+%apprun websockify
+  exec /opt/websockify/run "${@}"
+
+%environment
+  export PATH=/opt/TurboVNC/bin:${PATH}
+
+%post 
+  yum install -y epel-release
+  yum -y update
+  yum install -y git wget which gcc gcc-c++ gcc-gfortran vim emacs nano htop tcsh environment-modules \
+      libstdc++ libstdc++-devel libstdc++-static make python python-devel numpy
+  yum groupinstall "MATE Desktop" -y
+  yum remove -y tigervnc-license.noarch tigervnc-server-minimal.x86_64
+  wget https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo
+  mv TurboVNC.repo /etc/yum.repos.d/
+  yum install -y turbovnc 
+  cd /opt
+  git clone https://github.com/novnc/websockify.git
+  /bin/dbus-uuidgen > /etc/machine-id
+
+# Virtual GL required for gaussview, VMD, VESTA, XCrySDen
+  yum install -y VirtualGL libGLEW freeglut libglvnd-opengl libXScrnSaver numactl libpng12
+# gaussview, VESTA, XCrySDen PyMol Paraview PWGui SAS
+  yum -y install xorg-x11-apps xorg-x11-xauth mesa-dri-drivers
+  rm -rf /var/cache/yum 
+  yum clean all
+
+
