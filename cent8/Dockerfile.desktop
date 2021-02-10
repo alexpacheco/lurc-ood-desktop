@@ -1,0 +1,47 @@
+From centos:8
+
+Label "maintainer"="alp514@lehigh.edu" \
+      "os"="CentOS 8" \
+      "compiler"="GCC 8.3.1" \
+      "app"="Desktop" \
+      "description"="Base image for XFCE Desktop " 
+
+# Install epel-release
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
+ && sed -i.bak -e 's/enabled=0/enable=1/g' /etc/yum.repos.d/CentOS-Linux-PowerTools.repo \
+ && yum -y install glibc-langpack-en epel-release \
+ && yum -y update
+
+# Install required dependencies
+RUN yum -y install \
+   git make python38 python38-devel python38-numpy \
+   gcc gcc-c++ gcc-gfortran libstdc++ libstdc++-devel libstdc++-static \
+   vim emacs nano htop tcsh environment-modules wget which Lmod  zlib zlib-devel strace \
+   file file-devel
+
+# Install TurboVNC and Websockify
+RUN cd /etc/yum.repos.d/ \
+ && wget https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo \
+ && cat TurboVNC.repo | sed -e 's/TurboVNC/VirtualGL/g' -e 's/turbovnc/virtualgl/g' > VirtualGL.repo \
+ && yum -y install turbovnc VirtualGL \
+ && cd /opt \
+ && git clone https://github.com/novnc/websockify.git \
+ && /bin/dbus-uuidgen > /etc/machine-id
+
+# Install dependencies to get GUI apps working
+RUN yum -y install libGLEW freeglut libglvnd-opengl numactl libpng12  qt5-qtbase-gui \
+    xorg-x11-apps xorg-x11-xauth mesa-dri-drivers java-11-openjdk java-11-openjdk-devel \
+ && rm -rf /var/cache/yum \
+ && yum clean all
+
+# Setu Java version
+RUN update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-11-openjdk-11.0.9.11-3.el8_3.x86_64/bin/java 1 \
+ && update-alternatives --set java /usr/lib/jvm/java-11-openjdk-11.0.9.11-3.el8_3.x86_64/bin/java \
+ && update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-11-openjdk-11.0.9.11-3.el8_3.x86_64/bin/javac 1 \
+ && update-alternatives --set javac /usr/lib/jvm/java-11-openjdk-11.0.9.11-3.el8_3.x86_64/bin/javac
+
+# create profile for java
+RUN (echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-3.el8_3.x86_64' > /etc/profile.d/java.sh \
+ &&  echo 'export PATH=$PATH:$HOME/bin:$JAVA_HOME/bin' >> /etc/profile.d/java.sh)
+
+
