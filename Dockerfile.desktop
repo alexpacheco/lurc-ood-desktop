@@ -14,7 +14,8 @@ RUN yum install -y yum install https://dl.fedoraproject.org/pub/epel/epel-releas
 RUN yum -y install \
    git make python python-devel numpy python36 python36-devel python36-numpy \
    gcc gcc-c++ gcc-gfortran libstdc++ libstdc++-devel libstdc++-static \
-   vim emacs nano htop tcsh environment-modules wget which Lmod  zlib zlib-devel strace
+   vim emacs nano htop tcsh environment-modules wget which Lmod  zlib zlib-devel strace \
+   file file-devel
 
 # Install TurboVNC and Websockify
 RUN cd /etc/yum.repos.d/ \
