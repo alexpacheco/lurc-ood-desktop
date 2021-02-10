@@ -16,8 +16,11 @@ From: centos:7
 %post 
   yum install -y epel-release
   yum -y update
-  yum install -y git wget which gcc gcc-c++ gcc-gfortran vim emacs nano htop tcsh environment-modules \
-      libstdc++ libstdc++-devel libstdc++-static make python python-devel numpy
+  yum -y install \
+   git make python python-devel numpy python36 python36-devel python36-numpy \
+   gcc gcc-c++ gcc-gfortran libstdc++ libstdc++-devel libstdc++-static \
+   vim emacs nano htop tcsh environment-modules wget which Lmod  zlib zlib-devel strace \
+   file file-devel
   yum groupinstall "Xfce" -y
   yum remove -y tigervnc-license.noarch tigervnc-server-minimal.x86_64
   wget https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo
@@ -28,8 +31,9 @@ From: centos:7
   /bin/dbus-uuidgen > /etc/machine-id
 
 # Virtual GL required for gaussview, VMD, VESTA, XCrySDen
-  yum install -y VirtualGL libGLEW freeglut libglvnd-opengl libXScrnSaver numactl libpng12
+  yum install -y VirtualGL libGLEW freeglut libglvnd-opengl numactl libpng12
 # gaussview, VESTA, XCrySDen PyMol Paraview PWGui SAS
+ yum remove -y xfce4-screensaver libXScrnSaver tigervnc-license.noarch tigervnc-server-minimal.x86_64 \
   rm -rf /var/cache/yum 
   yum clean all
 

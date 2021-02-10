@@ -9,6 +9,7 @@ Label "maintainer"="alp514@lehigh.edu" \
 # Install MATE desktop
 RUN yum -y groupinstall "MATE Desktop" \
  && yum -y install xorg-x11-apps xorg-x11-xauth mesa-dri-drivers \
+ && yum remove -y libXScrnSaver tigervnc-license.noarch tigervnc-server-minimal.x86_64 \
  && rm -rf /var/cache/yum \
  && yum clean all
 

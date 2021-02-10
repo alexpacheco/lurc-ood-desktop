@@ -1,5 +1,5 @@
 BootStrap: docker
-From: alexpacheco/centos7:xfce
+From: alexpacheco/centos7:molgfx
 
 %labels
    MAINTAINER alp514@lehigh.edu
