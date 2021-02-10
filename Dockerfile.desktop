@@ -12,9 +12,9 @@ RUN yum install -y yum install https://dl.fedoraproject.org/pub/epel/epel-releas
 
 # Install required dependencies
 RUN yum -y install \
-   git make python python-devel numpy \
+   git make python python-devel numpy python36 python36-devel python36-numpy \
    gcc gcc-c++ gcc-gfortran libstdc++ libstdc++-devel libstdc++-static \
-   vim emacs nano htop tcsh environment-modules wget which 
+   vim emacs nano htop tcsh environment-modules wget which Lmod  zlib zlib-devel strace
 
 # Install TurboVNC and Websockify
 RUN cd /etc/yum.repos.d/ \
@@ -25,7 +25,7 @@ RUN cd /etc/yum.repos.d/ \
  && /bin/dbus-uuidgen > /etc/machine-id
 
 # Install dependencies to get GUI apps working
-RUN yum -y install VirtualGL libGLEW freeglut libglvnd-opengl libXScrnSaver numactl libpng12 \
+RUN yum -y install VirtualGL libGLEW freeglut libglvnd-opengl numactl libpng12 \
  && rm -rf /var/cache/yum \
  && yum clean all
 
