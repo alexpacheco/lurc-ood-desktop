@@ -1,0 +1,14 @@
+From alexpacheco/centos8:desktop
+
+Label "maintainer"="alp514@lehigh.edu" \
+      "os"="CentOS 8" \
+      "compiler"="GCC 8.3.1" \
+      "app"="Desktop" \
+      "description"="XFCE Desktop for LURC's OOD" 
+
+# Install XFCE desktop
+RUN yum -y groupinstall "Xfce" \
+ && yum remove -y xfce4-screensaver libXScrnSaver tigervnc-license.noarch tigervnc-server-minimal.x86_64 \
+ && rm -rf /var/cache/yum \
+ && yum clean all
+
