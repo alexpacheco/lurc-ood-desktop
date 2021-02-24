@@ -7,10 +7,11 @@ Label "maintainer"="alp514@lehigh.edu" \
       "description"="Molecular Graphics applications on LURC's OOD" 
 
 # Download Ovito and Gabedit, Install Avogadro2, Blender and Gabedit
+# libXScrnSaver provides libXss required by pwgui
 RUN cd /opt \
- && wget https://download-ib01.fedoraproject.org/pub/epel/6/x86_64/Packages/g/gabedit-2.3.0-1.el6.x86_64.rpm \
+ && wget https://archives.fedoraproject.org/pub/archive/epel/6/x86_64/Packages/g/gabedit-2.3.0-1.el6.x86_64.rpm \
  && wget http://www.ovito.org/download/master/ovito-basic-3.2.0-x86_64.tar.xz \
- && yum install -y gabedit-2.3.0-1.el6.x86_64.rpm avogadro2 avogadro2-libs avogadro2-libs-devel blender blender-rpm-macros \
+ && yum install -y gabedit-2.3.0-1.el6.x86_64.rpm avogadro2 avogadro2-libs avogadro2-libs-devel blender blender-rpm-macros libXScrnSaver \
  && tar -xvJf ovito-basic-3.2.0-x86_64.tar.xz \
  && mv ovito-basic-3.2.0-x86_64 ovito \
  && rm -rf gabedit-2.3.0-1.el6.x86_64.rpm ovito-basic-3.2.0-x86_64.tar.xz \
