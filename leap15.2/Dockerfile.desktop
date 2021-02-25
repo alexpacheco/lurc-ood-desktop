@@ -21,4 +21,6 @@ RUN zypper ar -G https://sourceforge.net/projects/turbovnc/files turbovnc \
  && git clone https://github.com/novnc/websockify.git \
  && /bin/dbus-uuidgen > /etc/machine-id
 
+# Setup Environment for TurboVNC
+ENV PATH=/opt/TurboVNC/bin:$PATH
 
