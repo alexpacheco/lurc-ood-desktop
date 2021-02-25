@@ -7,7 +7,7 @@ Label "maintainer"="alp514@lehigh.edu" \
       "description"="Base image for Leap 15.2 Desktop " 
 
 # Install required dependencies
-RUN zypper zypper update -y \
+RUN zypper update -y \
  && zypper in -y \
     gcc gcc-c++ gcc-gfortran gcc8 gcc8-c++ gcc8-fortran libstdc++6 libstdc++-devel \
     libstdc++6-gcc libstdc++6-devel-gcc libstdc++6-gcc8 libstdc++6-devel-gcc8 \
