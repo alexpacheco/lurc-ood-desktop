@@ -1,0 +1,27 @@
+From alexpacheco/leap:15.2-xfce
+
+Label "maintainer"="alp514@lehigh.edu" \
+      "os"="Leap 15.2" \
+      "compiler"="GCC 7.5.0" \
+      "app"="Desktop" \
+      "description"="Molecular Graphics applications on Leap XFCE for LURC's OOD"
+
+# Install Avogadro, Blender, Paraview and PyMol
+RUN zypper update -y \
+ && zypper in -y avogadro avogadro-devel avogadrolibs avogadrolibs-devel blender \
+      python3-pymol python3-tk paraview paraview-plugins python3-paraview 
+
+# Install Ovito and Gabedit
+RUN cd /opt \
+ && wget https://sites.google.com/site/allouchear/Home/gabedit/download/Gabedit64_30072020.tar.gz \
+ && tar -xvzf Gabedit64_30072020.tar.gz \
+ && wget https://www.ovito.org/download/master/ovito-basic-3.4.3-x86_64.tar.xz \
+ && tar -xvJf ovito-basic-3.4.3-x86_64.tar.xz \
+ && rm -rf Gabedit64_30072020.tar.gz ovito-basic-3.4.3-x86_64.tar.xz \
+ && /bin/dbus-uuidgen > /etc/machine-id
+
+# Setup Environments for Ovito and Gabedit
+ENV PATH=/opt/Gabedit64:/opt/ovito-basic-3.4.3-x86_64/bin:$PATH
+ENV LIBRARY_PATH=/opt/ovito-basic-3.4.3-x86_64/lib:$LIBRARY_PATH
+
+
