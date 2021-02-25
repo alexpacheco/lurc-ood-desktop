@@ -9,8 +9,7 @@ Label "maintainer"="alp514@lehigh.edu" \
 # Install required dependencies
 RUN zypper update -y \
  && zypper in -y \
-    gcc gcc-c++ gcc-gfortran gcc8 gcc8-c++ gcc8-fortran libstdc++6 libstdc++-devel \
-    libstdc++6-gcc libstdc++6-devel-gcc libstdc++6-gcc8 libstdc++6-devel-gcc8 \
+    gcc gcc-c++ gcc-fortran libstdc++6 \
     git wget which vim emacs nano tar unzip htop lua-lmod tcsh make cmake \
     python3 python3-devel python3-numpy python3-numpy-devel zlib zlib-devel \
     strace file file-devel 
