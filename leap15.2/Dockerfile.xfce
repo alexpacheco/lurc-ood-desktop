@@ -4,7 +4,7 @@ Label "maintainer"="alp514@lehigh.edu" \
       "os"="Leap 15.2" \
       "compiler"="GCC 7.5.0" \
       "app"="Desktop" \
-      "description"="Base image for Leap 15.2 Desktop " 
+      "description"="Leap 15.2 XFCE Desktop for LURC's OOD"
 
 # Install XFCE desktop
 RUN zypper update -y \
