@@ -8,6 +8,7 @@ Label "maintainer"="alp514@lehigh.edu" \
 
 # Install XFCE desktop
 RUN zypper update -y \
- && zypper in -y patterns-xfce-xfce xfce4-terminal
+ && zypper in -y patterns-xfce-xfce xfce4-terminal \
+ && zypper clean --all
 
 
