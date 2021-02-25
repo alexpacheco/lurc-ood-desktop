@@ -18,7 +18,7 @@ RUN cd /opt \
  && wget https://www.ovito.org/download/master/ovito-basic-3.4.3-x86_64.tar.xz \
  && tar -xvJf ovito-basic-3.4.3-x86_64.tar.xz \
  && rm -rf Gabedit64_30072020.tar.gz ovito-basic-3.4.3-x86_64.tar.xz \
- && zypper clean --all
+ && zypper clean --all \
  && /bin/dbus-uuidgen > /etc/machine-id
 
 # Setup Environments for Ovito and Gabedit
